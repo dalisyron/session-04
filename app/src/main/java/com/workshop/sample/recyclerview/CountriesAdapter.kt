@@ -19,6 +19,7 @@ class CountriesAdapter(val items: List<Country>) : RecyclerView.Adapter<CountryV
     override fun onBindViewHolder(p0: CountryViewHolder, p1: Int) {
         val viewHolder = p0
         viewHolder.nameTextView.text = items[p1].name
+        viewHolder.capitalTextView.text = items[p1].capital
     }
 
 }

@@ -20,7 +20,8 @@ class CountriesActivity : AppCompatActivity() {
         val countries = ArrayList<Country>()
         for (i in 0 until data.length()) {
             val name = data.getJSONObject(i).getJSONObject("name").getString("official")
-            val country = Country(name)
+            val capital = data.getJSONObject(i).getJSONArray("capital").optString(0) ?: "Unknown"
+            val country = Country(name, capital)
             countries.add(country)
         }
 
