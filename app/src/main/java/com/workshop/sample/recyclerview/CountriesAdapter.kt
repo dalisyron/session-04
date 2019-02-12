@@ -5,7 +5,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.workshop.sample.R
 
-class CountriesAdapter(val items: List<Country>, val onCountryListItemClickListener: OnCountryListItemClickListener) :
+class CountriesAdapter(
+    private val items: List<Country>,
+    private val onCountryListItemClickListener: OnCountryListItemClickListener
+) :
     RecyclerView.Adapter<CountryViewHolder>() {
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): CountryViewHolder {
@@ -17,14 +20,8 @@ class CountriesAdapter(val items: List<Country>, val onCountryListItemClickListe
         return items.size
     }
 
-    override fun onBindViewHolder(p0: CountryViewHolder, p1: Int) {
-        val viewHolder = p0
-        viewHolder.nameTextView.text = items[p1].name
-        viewHolder.capitalTextView.text = items[p1].capital
-
-        viewHolder.itemView.setOnClickListener {
-            onCountryListItemClickListener.onItemClicked(items[p1])
-        }
+    override fun onBindViewHolder(viewHolder: CountryViewHolder, p1: Int) {
+        viewHolder.bind(items[p1], onCountryListItemClickListener)
     }
 
 }
