@@ -18,8 +18,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        get(this)
-
         val number1Edit = findViewById<EditText>(R.id.number1EditText)
         val number2Edit = findViewById<EditText>(R.id.number2EditText)
         val resultView = findViewById<TextView>(R.id.resultText)

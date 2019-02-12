@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import com.workshop.sample.CountriesDataSource
 import com.workshop.sample.R
+import org.json.JSONArray
 
 class CountriesActivity : AppCompatActivity() {
 
@@ -12,22 +14,16 @@ class CountriesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_countries)
 
-        val countries = listOf(
-            Country("Iran"),
-            Country("A"),
-            Country("B"),
-            Country("C"),
-            Country("D"),
-            Country("E"),
-            Country("F"),
-            Country("Iran"),
-            Country("A"),
-            Country("B"),
-            Country("C"),
-            Country("D"),
-            Country("E"),
-            Country("F")
-        )
+        val countriesString = CountriesDataSource.get(this)
+        val data = JSONArray(countriesString)
+
+        val countries = ArrayList<Country>()
+        for (i in 0 until data.length()) {
+            val name = data.getJSONObject(i).getJSONObject("name").getString("official")
+            val country = Country(name)
+            countries.add(country)
+        }
+
 
         val recyclerview = findViewById<RecyclerView>(R.id.recyclerView)
         recyclerview.layoutManager = LinearLayoutManager(this)
